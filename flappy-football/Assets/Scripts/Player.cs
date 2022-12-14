@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
     /// </summary>
     public float gravity = -9.8f;
     public float strength = 5f;
-
+    public AudioSource ballSound;
+    public AudioSource whistle;
 
     private void Update()
     {
@@ -17,7 +18,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             direction = Vector3.up * strength;
-
+            ballSound.Play();
         }
 
        //to make sure that the ball is constantly being pulled by gravity, not doing this step makes the ball go upwards indefiniatly.
@@ -37,6 +38,7 @@ public class Player : MonoBehaviour
         } else if (other.gameObject.CompareTag("scoring") || other.gameObject.CompareTag("friend"))
         {
             FindObjectOfType<GameManager>().IncreaseScore();
+            whistle.Play();
         }
        
     }
